@@ -250,22 +250,22 @@ python infierence.py path/to/model path/to/image
 To get good inference results I recomend to follow this training sequence:
 
 ```bash
-#First check everything is working with a fast test only on FC layer
+# 1. Quick check: run a fast test on the fully connected (FC) layer only
 python train.py
 
-#Then we will start the fine tuning on last convolutional block
+# 2. Fine-tune starting from the last convolutional block
 python train.py --data-augmentation --epochs 30 --learning-rate 2e-3   --fine-tune-start 5 --tb-name "Fine Tunning (4th convolutional layer forward to FC layer)" --ckpt_path tb_logs/training/version_0/checkpoints/last.ckpt
 
-#Lets continue unlocking convolutional blocks for running our fine tunning
+# 3. Unlock the 3rd convolutional block and continue fine-tuning
 python train.py --data-augmentation --epochs 50 --learning-rate 2e-3   --fine-tune-start 4 --tb-name "Fine Tunning (3th convolutional layer forward to FC layer)" --ckpt_path tb_logs/Fine\ Tunning\ \(4th\ convolutional\ layer\ forward\ to\ FC\ layer\)/version_0/checkpoints/last.ckpt
 
-# Lets continue unlocking convolutional blocks for running our fine tunning
+# 4. Unlock the 2nd convolutional block and continue fine-tuning
 python train.py --data-augmentation --epochs 90 --learning-rate 1e-3   --fine-tune-start 3 --tb-name "Fine Tunning (2nd convolutional layer forward to FC layer)" --ckpt_path tb_logs/Fine\ Tunning\ \(3th\ convolutional\ layer\ forward\ to\ FC\ layer\)/version_0/checkpoints/last.ckpt
 
-# Lets continue unlocking convolutional blocks for running our fine tunning
+# 5. Unlock the 1st convolutional block (still with augmentation) for further fine-tuning
 python train.py --data-augmentation  --epochs 110 --learning-rate 1e-3 --fine-tune-start 2 --tb-name "Fine Tunning with data_aug (1st convolutional layer forward to FC layer)" --ckpt_path tb_logs/Fine\ Tunning\ \(2nd\ convolutional\ layer\ forward\ to\ FC\ layer\)/version_0/checkpoints/last.ckpt
 
-# Finally lets turn of data augmentation and lets run for 20 epochs more
+# 6. Final stage: turn off data augmentation and train 20 more epochs
 python train.py --epochs 130 --learning-rate 5e-4   --fine-tune-start 1 --tb-name "Fine Tunning wout data_aug (1st convolutional layer forward to FC layer)" --ckpt_path tb_logs/Fine\ Tunning\ with\ data_aug\ \(1st\ convolutional\ layer\ forward\ to\ FC\ layer\)/version_0/checkpoints/last.ckpt
 
 ```
