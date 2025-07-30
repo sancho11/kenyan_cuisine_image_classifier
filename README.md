@@ -223,8 +223,8 @@ This project provides a complete pipeline for building, training, evaluating and
 Clone the repository and build all projects in one step:
 
 ```bash
-git clone https://github.com/sancho11/from_scratch_image_classifier.git
-cd from_scratch_image_classifier
+git clone https://github.com/sancho11/kenyan_cuisine_image_classifier.git
+cd kenyan_cuisine_image_classifier
 python -m venv .venv
 source .venv/bin/activate  # On Windows, use: .venv\Scripts\activate
 pip install -r requirements.txt
