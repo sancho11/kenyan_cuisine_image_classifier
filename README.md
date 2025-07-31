@@ -243,7 +243,7 @@ python train.py
 #For running evaluation metrics on a trained model
 python evaluate.py path/to/model
 #For running classification on a single image.
-python infierence.py path/to/model path/to/image
+python infer.py path/to/model path/to/image
 ```
 
 ### Training
